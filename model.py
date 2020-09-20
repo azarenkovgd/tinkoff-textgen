@@ -28,7 +28,6 @@ class TextGenModel:
             sys.exit(f'Слишком маленький датасет')
 
         bigramms = get_bigramms(tokens)  # Получим все биграммы
-
         bigramms_counter = {}  # Создадим словарь для сохранения частотности всех биграмм
 
         for bigramm in bigramms:
@@ -51,9 +50,7 @@ class TextGenModel:
         """
 
         random.seed(seed)
-
         w1 = random.choice(list(self.model.keys()))
-
         gen_str = w1[0].upper() + w1[1:]
 
         for i in range(length - 1):
@@ -63,8 +60,8 @@ class TextGenModel:
                     w2 = random.choice(self.model[w1])[0]
                 else:
                     # Для избежания бесконечных самоповторов при большой длинне итоговой строки берется не просто
-                    # слово с самой высокой частотой появления после w1, а рандомное слово из первых пяти с самой
-                    # высокой частотой появления после w1
+                    # слово с самой высокой частотой появления после w1, а рандомное слово из первых
+                    # num_of_word_to_choose с самой высокой частотой появления после w1
                     w2 = random.choice(sorted(self.model[w1], key=lambda x: x[1], reverse=True)[:num_of_word_to_choose])[0]
             else:
                 # Если после слова w1 не шло ни одно другое слово, то выбирается рандомное слово из всех имеющихся в

@@ -22,6 +22,7 @@ def extract_tokens_from_file(path):
         for line in f:
             for word in re.findall(u'[а-я]+', line.lower()):
                 output.append(word)
+
     return output
 
 
@@ -29,8 +30,8 @@ def get_tokens(input_path):
     """Возвращает токены из файла или группы файлов"""
 
     check_path(input_path)
-
     output = []
+
     if os.path.isfile(input_path):
         output = extract_tokens_from_file(input_path)
     else:
